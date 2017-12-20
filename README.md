@@ -31,7 +31,7 @@ There are flags set by default in config.php but you can change them by referenc
 http://php.net/manual/en/function.imap-open.php
 
 # Referencing attachments/images
-When an email is processed, a unique ID will be generated for the MySQL record and if any attachments are present, a folder will be created in your "files" folder with the same unique ID as its name. Attachments will be saved there.
+When an email is processed, a unique ID will be generated for the MySQL record and if any attachments are present, a folder for that ID will be created in your "files" folder. Attachments will be saved there.
 
 Reference to images is only saved in the "text-html" part of the message, and not the "text-plain."
 
