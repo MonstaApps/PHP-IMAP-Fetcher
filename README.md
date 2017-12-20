@@ -41,7 +41,7 @@ Images are referenced like:
 
 When including the message in your own application you'll simply replace "[filePath]" with the relevant folder path, for example, if the path to your files is:
 
-www.example.com/application/files/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png
+[example.com]/application/files/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png
 
 then your code will be
 
