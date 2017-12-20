@@ -44,9 +44,9 @@ if ($grab_type == "fetch") {
           $uniqid = generateId(20).date("U");
           $emailMessage = new EmailObject($mysql,$uniqid,$source,$file_store);
           $emailMessage->readEmail();
-          //imap_delete($inbox, $n);
+          imap_delete($inbox, $n);
         }
-        //imap_expunge($inbox);
+        imap_expunge($inbox);
       }
     }
     /* imap_errors() is called to supress PHP errors, such as when a mailbox is empty */
