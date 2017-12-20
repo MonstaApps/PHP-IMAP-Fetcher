@@ -13,7 +13,7 @@ Navigate to the folder on your server where you want ot run the script.
 * config.php
 * mimeDecode.php
 
-2. Create a folder called "files" and make sure its writable by the web server.
+2. Create a folder called "files" and make sure it's writable by the web server.
 
 3. In your MySQL database, import the file:
 * mysql-structure.sql
@@ -39,4 +39,10 @@ Images are referenced like:
 
 [filePath]/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png
 
-When including the message in your own application you'll simply replace "[filePath]" with the relevant folder path.
+When including the message in your own application you'll simply replace "[filePath]" with the relevant folder path, for example, if the path to your files is:
+
+www.example.com/application/files/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png
+
+then your code will be
+
+$str = str_replace("[filePath]","/application/files",$str);
