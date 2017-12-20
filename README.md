@@ -27,6 +27,7 @@ The script is set to "fetch" by default but you can change it to "pipe" in confi
 
 # IMAP Flags
 There are flags set by default in config.php but you can change them by referencing:
+
 http://php.net/manual/en/function.imap-open.php
 
 # Referencing attachments/images
@@ -36,6 +37,6 @@ Reference to images is only saved in the "text-html" part of the message, and no
 
 Images are referenced like:
 
-<img src="[filePath]/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png">
+[filePath]/dkvmbY14NZr4l4eb79Gs1513724817/mypicture.png
 
 When including the message in your own application you'll simply replace "[filePath]" with the relevant folder path.
