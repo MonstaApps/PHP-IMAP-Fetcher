@@ -15,7 +15,7 @@ Navigate to the folder on your server where you want to run the script.
 
 2. Create a folder called "files" and make sure it's writable by the web server.
 
-3. In your MySQL database, import the file:
+3. In your MySQL database, create the tables "emails" and "files" by importing the file:
 * mysql-structure.sql
 
 4. Open the file config.php and add your MySQL and POP credentials.
