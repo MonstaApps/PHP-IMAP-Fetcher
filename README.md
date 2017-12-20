@@ -5,7 +5,7 @@ PHP IMAP Fetcher is an open source PHP script that can fetch or pipe emails from
 The script has been tested on emails sent from Gmail, Outlook, Yahoo, Apple Mail, Mozilla Thunderbird, and others.
 
 # Installing
-Navigate to the folder on your server where you want ot run the script.
+Navigate to the folder on your server where you want to run the script.
 
 1. Upload the files:
 * application.php
