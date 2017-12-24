@@ -30,6 +30,9 @@ There are flags set by default in config.php but you can change them by referenc
 
 http://php.net/manual/en/function.imap-open.php
 
+# Running the script
+The file to either pipe to or run as a cron job is application.php
+
 # Referencing attachments/images
 When an email is processed, a unique ID will be generated for the MySQL record and if any attachments are present, a folder for that ID will be created in your "files" folder. Attachments will be saved there.
 
