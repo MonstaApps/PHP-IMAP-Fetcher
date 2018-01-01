@@ -18,7 +18,7 @@ class EmailObject {
     
     // Decode email message into parts
     $decoder = new Mail_mimeDecode($this->source);
-    
+
     $this->decoded = $decoder->decode(
       Array(
         "decode_headers" => TRUE,
@@ -29,17 +29,24 @@ class EmailObject {
     
     // Get from name and email
     $this->from  = $this->decoded->headers["from"];
-    $this->name  = preg_replace("/ <(.*)>$/", "", $this->from);
-    $this->email = preg_replace("/.*<(.*)>.*/","$1",$this->from);
-
+    
+    if (preg_match("/.* <.*@.*\..*>/i",$this->from,$matches)) {
+      $this->name  = preg_replace("/ <(.*)>$/", "", $this->from);
+      $this->email = preg_replace("/.*<(.*)>.*/","$1",$this->from);
+    } else {
+      $this->email = $this->from;
+    }
+      
     // Get subject
     $this->subject = trim($this->decoded->headers["subject"]);
 
-    // Get body & attachments
+    // Get body & attachments (if available)
     if (is_array($this->decoded->parts)) {
       foreach($this->decoded->parts as $arItem => $body_part){
         $this->decodePart($body_part);
       }
+    } else {
+      $this->bodyText = $this->decoded->body;
     }
 
 	// Save Message to MySQL
@@ -48,8 +55,6 @@ class EmailObject {
 
   // Decode body part
   private function decodePart($body_part){
-    
-    //echo "<pre>".print_r($body_part)."</pre>";
     
     // Get file and file name
     if (isset($body_part->d_parameters["filename"])) {
@@ -89,18 +94,21 @@ class EmailObject {
     }
     
     // Get plain text version
-    if($mimeType == "text/plain") {
+    if ($mimeType == "text/plain") {
       if (!isset($body_part->disposition)) {
         $this->bodyText .= $body_part->body;
       }
     }
     
     // Get HTML version
-    if($mimeType == "text/html") {
+    if ($mimeType == "text/html") {
       if (!isset($body_part->disposition)) {
         $this->bodyHtml .= $body_part->body;
       }
     }
+    echo "<P>".$body_part->ctype_primary;
+    if ($body_part->ctype_primary == "body")
+      echo $body_part->body;
   }
   
   // Save file
@@ -171,7 +179,7 @@ class EmailObject {
     
     // Insert message to MySQL
     mysql_query("INSERT INTO emails (uniqid,time,name,email,subject,body_text,body_html) VALUES ('".$uniqid."',now(),'".$name."','".$email."','".$subject."','".$body_text."','".$body_html."')");
-    
+
     // Get the AI ID from MySQL
     $result = mysql_query ("SELECT id FROM emails WHERE uniqid='".$uniqid."'");
     $row = mysql_fetch_array($result);
